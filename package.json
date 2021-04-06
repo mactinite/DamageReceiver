@@ -1,0 +1,15 @@
+{
+  "name": "com.mactinite.extensibledamagesystem",
+  "version": "0.0.0",
+  "displayName": "Extensible Damage System",
+  "description": "A Damage System that provides an extensible core to support many damage systems.",
+  "unity": "2020.3",
+  "dependencies": {
+    "com.unity.textmeshpro": "3.0.0"
+  },
+  "author": {
+    "name": "Hunter MacDonald",
+    "url": "https://github.com/mactinite"
+  },
+  "type": "library"
+}
