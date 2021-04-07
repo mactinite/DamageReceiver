@@ -19,7 +19,7 @@ namespace mactinite.ExtensibleDamageSystem
         /// Apply straight damage to damageable, at a position
         /// </summary>
         /// <param name="damage">damage to apply</param>
-        public void DamageAt(float damage, Vector2 at);
+        public void DamageAt(Damage damage, Vector2 at);
 
         public Transform transform {get;}
     }

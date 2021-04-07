@@ -12,6 +12,7 @@ namespace mactinite.ExtensibleDamageSystem.statusEffects
         private ParticleSystem instantiatedVisualEffect = null;
         public ParticleSystem visualEffect;
         public Color damageColor = Color.red;
+        
         public override void OnTick(IDamageable d)
         {
             if (instantiatedVisualEffect == null)

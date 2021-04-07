@@ -14,9 +14,9 @@ namespace mactinite.ExtensibleDamageSystem
     public class Damageable : MonoBehaviour, IDamageable
     {
         public float health = 100;
-        public Action<Vector2, float> OnDamage;
+        public Action<Vector2, Damage> OnDamage;
         public Action<Vector2> OnDestroyed;
-        public Func<float, float> OnProcessDamage;
+        public Func<Damage, Damage> OnProcessDamage;
 
         private float iTimer = 0;
         public float iTime = 0.08f;
@@ -32,26 +32,28 @@ namespace mactinite.ExtensibleDamageSystem
         }
 
 
-        public void Damage(float damage)
+        public void Damage(float damageAmount)
         {
+            Damage damage = new Damage();
+            damage.damageAmount = damageAmount;
             DamageAt(damage, transform.position);
         }
 
-        public void DamageAt(float damage, Vector2 at)
+        public void DamageAt(Damage damage, Vector2 at)
         {
             if (iTimer > 0) return;
             // let extensions pre-process damage. Iterate through registered processors and execute the method
-            float dmg = damage;
+            Damage dmg = damage;
             if (OnProcessDamage != null)
             {
-                foreach (Func<float, float> subscriber in OnProcessDamage.GetInvocationList())
+                foreach (Func<Damage, Damage> subscriber in OnProcessDamage.GetInvocationList())
                 {
                     dmg = subscriber(dmg);
                 }
             }
 
             // apply damage and invoke events
-            if (health - dmg <= 0)
+            if (health - dmg.damageAmount <= 0)
             {
                 health = 0;
                 // emit destroyed event and let extensions handle reactions like recycling or destroying.
@@ -60,7 +62,7 @@ namespace mactinite.ExtensibleDamageSystem
             }
             else
             {
-                health -= dmg;
+                health -= dmg.damageAmount;
                 // same as destroyed event, but for damage. Extensions can handle things like spawning effects.
                 OnDamage?.Invoke(at, dmg);
             }

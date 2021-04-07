@@ -20,14 +20,14 @@ namespace mactinite.ExtensibleDamageSystem.Numbers
             damageable.OnDamage += OnDamage;
         }
 
-        public void OnDamage(Vector2 position, float dmg)
+        public void OnDamage(Vector2 position, Damage dmg)
         {
-            DamageDisplayManager.SpawnText(dmg.ToString("0"), Color.white, position);
+            DamageDisplayManager.SpawnText(dmg.damageAmount.ToString("0"), Color.white, position);
         }
 
-        public void OnDamage(Vector2 position, float dmg, Color color)
+        public void OnDamage(Vector2 position, Damage dmg, Color color)
         {
-            DamageDisplayManager.SpawnText(dmg.ToString("0"), color, position);
+            DamageDisplayManager.SpawnText(dmg.damageAmount.ToString("0"), color, position);
         }
     }
 }

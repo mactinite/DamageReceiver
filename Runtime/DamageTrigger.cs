@@ -13,7 +13,9 @@ namespace mactinite.ExtensibleDamageSystem
             // if other collider has a damageable, apply that damage
             if(collision.TryGetComponent<IDamageable>(out var damageable))
             {
-                damageable.DamageAt(damage, collision.ClosestPoint(transform.position));
+                Damage dmg = new Damage();
+                dmg.damageAmount = damage;
+                damageable.DamageAt(dmg, collision.ClosestPoint(transform.position));
             }
         }
 
