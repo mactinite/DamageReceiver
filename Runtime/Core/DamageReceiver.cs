@@ -4,14 +4,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace mactinite.ExtensibleDamageSystem
+namespace mactinite.DamageReceiver
 {
     /// <summary>
-    /// Damageable that simply tracks health and fires events.
-    /// Forms the base for the ExtensibleDamageSystem system.
-    /// Implements the IDamageable interface. 
+    /// DamageReceiver that simply tracks health and fires events.
+    /// Forms the base for the DamageReceiver system.
+    /// Implements the IDamageReceiver interface. 
     /// </summary>
-    public class Damageable : MonoBehaviour, IDamageable
+    public class DamageReceiver : MonoBehaviour, IDamageReceiver
     {
         public float health = 100;
         public Action<Vector2, Damage> OnDamage;
@@ -21,7 +21,7 @@ namespace mactinite.ExtensibleDamageSystem
         private float iTimer = 0;
         public float iTime = 0.08f;
 
-        Transform IDamageable.transform { get => transform;}
+        Transform IDamageReceiver.transform { get => transform;}
 
         public virtual void Update()
         {

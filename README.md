@@ -1,9 +1,6 @@
-# Extensible Damage System
-Extensible Damage System for Unity
+# Damage Receiver
 
-An open source 2D Combat system for unity. 
-
-Uses built in Unity2D collision with a base damageable component handling damage events and passing to extensions.
+A component for unity that generically receives damage messages, extensible through composition.
 
 Some example use cases: 
 

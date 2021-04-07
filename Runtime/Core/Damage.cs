@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace mactinite.ExtensibleDamageSystem
+namespace mactinite.DamageReceiver
 {
     public class Damage
     {

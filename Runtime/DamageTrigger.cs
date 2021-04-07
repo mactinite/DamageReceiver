@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace mactinite.ExtensibleDamageSystem
+namespace mactinite.DamageReceiver
 {
     public class DamageTrigger : MonoBehaviour
     {
@@ -10,12 +10,12 @@ namespace mactinite.ExtensibleDamageSystem
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            // if other collider has a damageable, apply that damage
-            if(collision.TryGetComponent<IDamageable>(out var damageable))
+            // if other collider has a DamageReceiver, apply that damage
+            if(collision.TryGetComponent<IDamageReceiver>(out var DamageReceiver))
             {
                 Damage dmg = new Damage();
                 dmg.damageAmount = damage;
-                damageable.DamageAt(dmg, collision.ClosestPoint(transform.position));
+                DamageReceiver.DamageAt(dmg, collision.ClosestPoint(transform.position));
             }
         }
 

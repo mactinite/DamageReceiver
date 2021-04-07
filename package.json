@@ -1,8 +1,8 @@
 {
-  "name": "com.mactinite.extensibledamagesystem",
+  "name": "com.mactinite.damagereceiver",
   "version": "0.0.1",
-  "displayName": "Extensible Damage System",
-  "description": "A Damage System that provides an extensible core to support many damage systems.",
+  "displayName": "Damage Receiver",
+  "description": "A component for unity that generically receives damage messages, extensible through composition.",
   "unity": "2020.3",
   "dependencies": {
     "com.unity.textmeshpro": "3.0.0"
@@ -11,6 +11,5 @@
     "name": "Hunter MacDonald",
     "url": "https://github.com/mactinite"
   },
-  "type": "System",
   "hideInEditor": false
 }
