@@ -9,6 +9,12 @@ namespace mactinite.DamageReceiver
     /// </summary>
     public interface IDamageReceiver
     {
+
+        /// <summary>
+        /// Apply straight damage to DamageReceiver.
+        /// </summary>
+        /// <param name="damage">damage to apply</param>
+        public void Damage(Damage damage);
         /// <summary>
         /// Apply straight damage to DamageReceiver.
         /// </summary>

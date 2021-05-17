@@ -34,8 +34,12 @@ namespace mactinite.DamageReceiver
 
         public void Damage(float damageAmount)
         {
-            Damage damage = new Damage();
-            damage.damageAmount = damageAmount;
+            Damage damage = new Damage(damageAmount);
+            DamageAt(damage, transform.position);
+        }
+
+        public void Damage(Damage damage)
+        {
             DamageAt(damage, transform.position);
         }
 
