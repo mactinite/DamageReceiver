@@ -14,6 +14,7 @@ namespace mactinite.DamageReceiver
     public class DamageReceiver : MonoBehaviour, IDamageReceiver
     {
         public float health = 100;
+        public bool destroyed = false;
         public Action<Vector2, Damage> OnDamage;
         public Action<Vector2> OnDestroyed;
         public Func<Damage, Damage> OnProcessDamage;
@@ -31,6 +32,12 @@ namespace mactinite.DamageReceiver
             }
         }
 
+
+        public void Damage(float damageAmount, Vector2 position)
+        {
+            Damage damage = new Damage(damageAmount);
+            DamageAt(damage, position);
+        }
 
         public void Damage(float damageAmount)
         {
@@ -57,17 +64,23 @@ namespace mactinite.DamageReceiver
             }
 
             // apply damage and invoke events
-            if (health - dmg.damageAmount <= 0)
+            if (health - dmg.damageAmount <= 0 && !destroyed)
             {
                 health = 0;
+
+                dmg.newHealth = health;
+
+
                 // emit destroyed event and let extensions handle reactions like recycling or destroying.
                 OnDamage?.Invoke(at, dmg);
                 OnDestroyed?.Invoke(at);
+                destroyed = true;
             }
             else
             {
                 health -= dmg.damageAmount;
                 // same as destroyed event, but for damage. Extensions can handle things like spawning effects.
+                dmg.newHealth = health;
                 OnDamage?.Invoke(at, dmg);
             }
             iTimer = iTime;

@@ -21,6 +21,12 @@ namespace mactinite.DamageReceiver
         /// <param name="damage">damage to apply</param>
         public void Damage(float damage);
 
+                /// <summary>
+        /// Apply straight damage to DamageReceiver.
+        /// </summary>
+        /// <param name="damage">damage to apply</param>
+        public void Damage(float damage, Vector2 position);
+
         /// <summary>
         /// Apply straight damage to DamageReceiver, at a position
         /// </summary>

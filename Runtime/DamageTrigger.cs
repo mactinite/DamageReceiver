@@ -14,8 +14,7 @@ namespace mactinite.DamageReceiver
             // if other collider has a DamageReceiver, apply that damage
             if(collision.TryGetComponent<IDamageReceiver>(out var DamageReceiver))
             {
-                Damage dmg = new Damage(damage, damageType);
-                DamageReceiver.DamageAt(dmg, collision.ClosestPoint(transform.position));
+                DamageReceiver.Damage(damage, collision.ClosestPoint(transform.position));
             }
         }
 

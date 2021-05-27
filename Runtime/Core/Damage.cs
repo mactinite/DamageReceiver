@@ -8,14 +8,13 @@ namespace mactinite.DamageReceiver
     [System.Serializable]
     public class Damage
     {
+        public float newHealth;
         public float damageAmount;
-        public DamageType damageType;
         public GenericDictionary parameters = new GenericDictionary();
 
-        public Damage(float damageAmount, DamageType type)
+        public Damage(float damageAmount, float newHealth)
         {
             this.damageAmount = damageAmount;
-            this.damageType = type;
         }
         public Damage(float damageAmount)
         {
