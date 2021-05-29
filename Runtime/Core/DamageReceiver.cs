@@ -14,8 +14,10 @@ namespace mactinite.DamageReceiver
     public class DamageReceiver : MonoBehaviour, IDamageReceiver
     {
         public float health = 100;
+        public float maxHealth = 100;
         public bool destroyed = false;
         public Action<Vector2, Damage> OnDamage;
+        public Action<float> OnHeal;
         public Action<Vector2> OnDestroyed;
         public Func<Damage, Damage> OnProcessDamage;
 
@@ -84,6 +86,17 @@ namespace mactinite.DamageReceiver
                 OnDamage?.Invoke(at, dmg);
             }
             iTimer = iTime;
+        }
+
+        public void Heal(float amount) {
+            if(health + amount <= maxHealth){
+                health = health + amount;
+                OnHeal?.Invoke(amount);
+            } else {
+                var healAmt = maxHealth - health;
+                health = maxHealth;
+                OnHeal?.Invoke(healAmt);
+            }
         }
     }
 }

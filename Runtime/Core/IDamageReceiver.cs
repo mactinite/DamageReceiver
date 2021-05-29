@@ -21,7 +21,7 @@ namespace mactinite.DamageReceiver
         /// <param name="damage">damage to apply</param>
         public void Damage(float damage);
 
-                /// <summary>
+        /// <summary>
         /// Apply straight damage to DamageReceiver.
         /// </summary>
         /// <param name="damage">damage to apply</param>
@@ -32,6 +32,11 @@ namespace mactinite.DamageReceiver
         /// </summary>
         /// <param name="damage">damage to apply</param>
         public void DamageAt(Damage damage, Vector2 at);
+        /// <summary>
+        /// Restore health to the damage receiver
+        /// </summary>
+        /// <param name="amount">amount to heal</param>
+        public void Heal(float amount);
 
         public Transform transform {get;}
     }
