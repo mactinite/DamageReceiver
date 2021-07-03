@@ -11,11 +11,18 @@ namespace mactinite.DamageReceiver
         public float newHealth;
         public float damageAmount;
         public GenericDictionary parameters = new GenericDictionary();
-
+        public GameObject source;
         public Damage(float damageAmount, float newHealth)
         {
             this.damageAmount = damageAmount;
         }
+
+        public Damage(float damageAmount, GameObject source)
+        {
+            this.damageAmount = damageAmount;
+            this.source = source;
+        }
+
         public Damage(float damageAmount)
         {
             this.damageAmount = damageAmount;

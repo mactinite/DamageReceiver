@@ -20,6 +20,10 @@ namespace mactinite.DamageReceiver
         public Action<float> OnHeal;
         public Action<Vector2> OnDestroyed;
         public Func<Damage, Damage> OnProcessDamage;
+        [HideInInspector]
+        public bool wasDamagedThisFrame = false;
+
+        public GameObject lastDamagedBy;
 
         private float iTimer = 0;
         public float iTime = 0.08f;
@@ -31,7 +35,10 @@ namespace mactinite.DamageReceiver
             if (iTimer > 0)
             {
                 iTimer -= Time.deltaTime;
+            } else if(wasDamagedThisFrame){
+                wasDamagedThisFrame = false;
             }
+            
         }
 
 
@@ -85,6 +92,8 @@ namespace mactinite.DamageReceiver
                 dmg.newHealth = health;
                 OnDamage?.Invoke(at, dmg);
             }
+            lastDamagedBy = dmg.source;
+            wasDamagedThisFrame = true;
             iTimer = iTime;
         }
 
