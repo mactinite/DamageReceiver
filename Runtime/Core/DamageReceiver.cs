@@ -92,7 +92,8 @@ namespace mactinite.DamageReceiver
                 dmg.newHealth = health;
                 OnDamage?.Invoke(at, dmg);
             }
-            lastDamagedBy = dmg.source;
+            var damageReceiver = dmg.source?.GetComponentInParent<DamageReceiver>();
+            lastDamagedBy = damageReceiver ? damageReceiver.gameObject : dmg.source;
             wasDamagedThisFrame = true;
             iTimer = iTime;
         }

@@ -2,19 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using mactinite.DamageReceiver;
+using mactinite.ToolboxCommons;
 namespace mactinite.DamageReceiver
 {
     public class DamageTrigger : MonoBehaviour
     {
         public float damage = 10;
         public DamageType damageType;
+        public LayerMask damageMask;
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            // if other collider has a DamageReceiver, apply that damage
-            if(collision.TryGetComponent<IDamageReceiver>(out var DamageReceiver))
+            if (collision.gameObject.IsInLayerMask(damageMask))
             {
-                DamageReceiver.Damage(damage, collision.ClosestPoint(transform.position));
+                // if other collider has a DamageReceiver, apply that damage
+                if (collision.TryGetComponent<IDamageReceiver>(out var DamageReceiver))
+                {
+                    DamageReceiver.DamageAt(new Damage(damage, gameObject), collision.ClosestPoint(transform.position));
+                }
             }
         }
 
