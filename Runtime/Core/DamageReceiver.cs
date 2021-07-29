@@ -32,13 +32,18 @@ namespace mactinite.DamageReceiver
 
         public virtual void Update()
         {
-            if (iTimer > 0)
+            if (iTimer >= 0)
             {
                 iTimer -= Time.deltaTime;
-            } else if(wasDamagedThisFrame){
-                wasDamagedThisFrame = false;
             }
             
+        }
+
+        private void LateUpdate() {
+            if(wasDamagedThisFrame) {
+                iTimer = iTime;
+                wasDamagedThisFrame = false;
+            }
         }
 
 
@@ -95,7 +100,6 @@ namespace mactinite.DamageReceiver
             var damageReceiver = dmg.source?.GetComponentInParent<DamageReceiver>();
             lastDamagedBy = damageReceiver ? damageReceiver.gameObject : dmg.source;
             wasDamagedThisFrame = true;
-            iTimer = iTime;
         }
 
         public void Heal(float amount) {
