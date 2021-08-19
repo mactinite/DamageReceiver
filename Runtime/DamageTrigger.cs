@@ -23,5 +23,18 @@ namespace mactinite.DamageReceiver
             }
         }
 
+        private void OnTriggerStay2D(Collider2D collision)
+        {
+            if (collision.gameObject.IsInLayerMask(damageMask))
+            {
+
+                // if other collider has a DamageReceiver, apply that damage
+                if (collision.TryGetComponent<IDamageReceiver>(out var DamageReceiver))
+                {
+                    DamageReceiver.DamageAt(new Damage(damage, gameObject), collision.ClosestPoint(transform.position));
+                }
+            }
+        }
+
     }
 }
