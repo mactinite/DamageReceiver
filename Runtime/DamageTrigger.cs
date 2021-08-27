@@ -8,7 +8,6 @@ namespace mactinite.DamageReceiver
     public class DamageTrigger : MonoBehaviour
     {
         public float damage = 10;
-        public DamageType damageType;
         public LayerMask damageMask;
 
         private void OnTriggerEnter2D(Collider2D collision)
@@ -18,7 +17,7 @@ namespace mactinite.DamageReceiver
                 // if other collider has a DamageReceiver, apply that damage
                 if (collision.TryGetComponent<IDamageReceiver>(out var DamageReceiver))
                 {
-                    DamageReceiver.DamageAt(new Damage(damage, gameObject), collision.ClosestPoint(transform.position));
+                    DamageReceiver.DamageAt(new BasicDamage(damage), collision.ClosestPoint(transform.position));
                 }
             }
         }
@@ -31,7 +30,7 @@ namespace mactinite.DamageReceiver
                 // if other collider has a DamageReceiver, apply that damage
                 if (collision.TryGetComponent<IDamageReceiver>(out var DamageReceiver))
                 {
-                    DamageReceiver.DamageAt(new Damage(damage, gameObject), collision.ClosestPoint(transform.position));
+                    DamageReceiver.DamageAt(new BasicDamage(damage), collision.ClosestPoint(transform.position));
                 }
             }
         }

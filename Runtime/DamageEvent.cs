@@ -15,7 +15,7 @@ namespace mactinite.DamageReceiver
             GetComponent<DamageReceiver>().OnDamage += OnDamageReceived;
         }
 
-        private void OnDamageReceived(Vector2 pos, Damage dmg)
+        private void OnDamageReceived(Vector2 pos, IDamage dmg)
         {
             OnDamage.Invoke(dmg.damageAmount);
         }

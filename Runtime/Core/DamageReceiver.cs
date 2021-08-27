@@ -16,10 +16,10 @@ namespace mactinite.DamageReceiver
         public float health = 100;
         public float maxHealth = 100;
         public bool destroyed = false;
-        public Action<Vector2, Damage> OnDamage;
+        public Action<Vector2, IDamage> OnDamage;
         public Action<float> OnHeal;
         public Action<Vector2> OnDestroyed;
-        public Func<Damage, Damage> OnProcessDamage;
+        public Func<IDamage, IDamage> OnProcessDamage;
         [HideInInspector]
         public bool wasDamagedThisFrame = false;
 
@@ -46,32 +46,19 @@ namespace mactinite.DamageReceiver
             }
         }
 
-
-        public void Damage(float damageAmount, Vector2 position)
-        {
-            Damage damage = new Damage(damageAmount);
-            DamageAt(damage, position);
-        }
-
-        public void Damage(float damageAmount)
-        {
-            Damage damage = new Damage(damageAmount);
-            DamageAt(damage, transform.position);
-        }
-
-        public void Damage(Damage damage)
+        public void Damage(IDamage damage)
         {
             DamageAt(damage, transform.position);
         }
 
-        public void DamageAt(Damage damage, Vector2 at)
+        public void DamageAt(IDamage damage, Vector2 at)
         {
             if (iTimer > 0) return;
             // let extensions pre-process damage. Iterate through registered processors and execute the method
-            Damage dmg = damage;
+            IDamage dmg = damage;
             if (OnProcessDamage != null)
             {
-                foreach (Func<Damage, Damage> subscriber in OnProcessDamage.GetInvocationList())
+                foreach (Func<IDamage, IDamage> subscriber in OnProcessDamage.GetInvocationList())
                 {
                     dmg = subscriber(dmg);
                 }
@@ -81,10 +68,7 @@ namespace mactinite.DamageReceiver
             if (health - dmg.damageAmount <= 0 && !destroyed)
             {
                 health = 0;
-
                 dmg.newHealth = health;
-
-
                 // emit destroyed event and let extensions handle reactions like recycling or destroying.
                 OnDamage?.Invoke(at, dmg);
                 OnDestroyed?.Invoke(at);
@@ -93,8 +77,8 @@ namespace mactinite.DamageReceiver
             else
             {
                 health -= dmg.damageAmount;
-                // same as destroyed event, but for damage. Extensions can handle things like spawning effects.
                 dmg.newHealth = health;
+                // same as destroyed event, but for damage. Extensions can handle things like spawning effects.
                 OnDamage?.Invoke(at, dmg);
             }
             var damageReceiver = dmg.source?.GetComponentInParent<DamageReceiver>();
