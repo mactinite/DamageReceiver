@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using mactinite.DamageReceiver;
 using mactinite.ToolboxCommons;
-namespace mactinite.DamageReceiver
+
+namespace mactinite.EDS.Basic
 {
     public class DamageEvent : MonoBehaviour
     {
@@ -12,12 +12,12 @@ namespace mactinite.DamageReceiver
 
         private void Start()
         {
-            GetComponent<DamageReceiver>().OnDamage += OnDamageReceived;
+            GetComponent<BasicDamageReceiver>().OnDamage += OnDamageReceived;
         }
 
-        private void OnDamageReceived(Vector2 pos, IDamage dmg)
+        private void OnDamageReceived(Vector2 pos, BasicDamage dmg)
         {
-            OnDamage.Invoke(dmg.damageAmount);
+            OnDamage.Invoke(dmg.Amount);
         }
 
     }

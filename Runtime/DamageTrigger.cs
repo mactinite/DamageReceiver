@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using mactinite.DamageReceiver;
 using mactinite.ToolboxCommons;
-namespace mactinite.DamageReceiver
+
+namespace mactinite.EDS.Basic
 {
     public class DamageTrigger : MonoBehaviour
     {
@@ -15,7 +15,7 @@ namespace mactinite.DamageReceiver
             if (collision.gameObject.IsInLayerMask(damageMask))
             {
                 // if other collider has a DamageReceiver, apply that damage
-                if (collision.TryGetComponent<IDamageReceiver>(out var DamageReceiver))
+                if (collision.TryGetComponent<BasicDamageReceiver>(out var DamageReceiver))
                 {
                     DamageReceiver.DamageAt(new BasicDamage(damage), collision.ClosestPoint(transform.position));
                 }
@@ -28,7 +28,7 @@ namespace mactinite.DamageReceiver
             {
 
                 // if other collider has a DamageReceiver, apply that damage
-                if (collision.TryGetComponent<IDamageReceiver>(out var DamageReceiver))
+                if (collision.TryGetComponent<BasicDamageReceiver>(out var DamageReceiver))
                 {
                     DamageReceiver.DamageAt(new BasicDamage(damage), collision.ClosestPoint(transform.position));
                 }
