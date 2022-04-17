@@ -1,7 +1,7 @@
 {
-  "name": "com.mactinite.damagereceiver",
-  "version": "0.0.1",
-  "displayName": "Damage Receiver",
+  "name": "com.mactinite.extensibledamagesystem",
+  "version": "0.2.0",
+  "displayName": "Extensible Damage System",
   "description": "A component for unity that generically receives damage messages, extensible through composition.",
   "unity": "2020.3",
   "dependencies": {
