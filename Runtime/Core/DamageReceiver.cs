@@ -62,12 +62,12 @@ namespace mactinite.EDS
             // apply damage and invoke events
             if (health - dmg.Amount <= 0 && !destroyed)
             {
+                destroyed = true;
                 health = 0;
                 dmg.NewHealth = health;
                 // emit destroyed event and let extensions handle reactions like recycling or destroying.
                 OnDamage?.Invoke(at, dmg);
                 OnDestroyed?.Invoke(at);
-                destroyed = true;
             }
             else
             {
