@@ -59,6 +59,8 @@ namespace mactinite.EDS
                 }
             }
 
+            if (dmg.Amount <= 0) return;
+
             // apply damage and invoke events
             if (health - dmg.Amount <= 0 && !destroyed)
             {
