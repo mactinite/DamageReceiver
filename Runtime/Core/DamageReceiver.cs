@@ -23,6 +23,7 @@ namespace mactinite.EDS
 
         private float iTimer = 0;
         public float iTime = 0.08f;
+        public bool invincible = false;
         public virtual void Update()
         {
             if (iTimer >= 0)
@@ -48,7 +49,7 @@ namespace mactinite.EDS
 
         public void DamageAt(T damage, Vector2 at)
         {
-            if (iTimer > 0) return;
+            if (iTimer > 0 || invincible) return;
             // let extensions pre-process damage. Iterate through registered processors and execute the method
             T dmg = damage;
             if (OnProcessDamage != null)
