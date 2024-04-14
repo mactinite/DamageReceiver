@@ -37,7 +37,6 @@ namespace mactinite.EDS
         {
             if (wasDamagedThisFrame)
             {
-                iTimer = iTime;
                 wasDamagedThisFrame = false;
             }
         }
@@ -79,7 +78,7 @@ namespace mactinite.EDS
                 // same as destroyed event, but for damage. Extensions can handle things like spawning effects.
                 OnDamage?.Invoke(at, dmg);
             }
-
+            iTimer = iTime;
             wasDamagedThisFrame = true;
         }
 
