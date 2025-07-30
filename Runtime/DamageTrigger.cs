@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
+using mactinite.ToolboxCommons.Extensions;
 using UnityEngine;
-using mactinite.ToolboxCommons;
 
 namespace mactinite.EDS.Basic
 {
@@ -17,7 +15,10 @@ namespace mactinite.EDS.Basic
                 // if other collider has a DamageReceiver, apply that damage
                 if (collision.TryGetComponent<BasicDamageReceiver>(out var DamageReceiver))
                 {
-                    DamageReceiver.DamageAt(new BasicDamage(damage), collision.ClosestPoint(transform.position));
+                    DamageReceiver.DamageAt(
+                        new BasicDamage(damage),
+                        collision.ClosestPoint(transform.position)
+                    );
                 }
             }
         }
@@ -26,14 +27,15 @@ namespace mactinite.EDS.Basic
         {
             if (collision.gameObject.IsInLayerMask(damageMask))
             {
-
                 // if other collider has a DamageReceiver, apply that damage
                 if (collision.TryGetComponent<BasicDamageReceiver>(out var DamageReceiver))
                 {
-                    DamageReceiver.DamageAt(new BasicDamage(damage), collision.ClosestPoint(transform.position));
+                    DamageReceiver.DamageAt(
+                        new BasicDamage(damage),
+                        collision.ClosestPoint(transform.position)
+                    );
                 }
             }
         }
-
     }
 }
